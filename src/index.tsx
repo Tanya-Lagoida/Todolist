@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM, { render } from 'react-dom';
+import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './App';
 import reportWebVitals from './reportWebVitals';
-import { createTheme, ThemeProvider, styled, ThemeOptions } from '@mui/material/styles';
-import { orange } from '@mui/material/colors';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
