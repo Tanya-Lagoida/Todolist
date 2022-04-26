@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import { Menu } from '@mui/icons-material';
 
-type TodolistType = {
+export type TodolistType = {
   id: string
   title: string
   filter: FilterValueType
