@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { App } from './App';
 import reportWebVitals from './reportWebVitals';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { AppWithRedux } from './AppWithRedux';
+import { Provider } from 'react-redux';
+import { store } from './Store/store';
 
 const theme = createTheme({
   palette: {
@@ -20,11 +22,13 @@ const theme = createTheme({
 })
 
 ReactDOM.render(
+  <Provider store={store}>
   <ThemeProvider  theme={theme}>
   <React.StrictMode>
-    <App />
+    <AppWithRedux />
   </React.StrictMode>
-  </ThemeProvider>,
+  </ThemeProvider>
+  </Provider>,
   document.getElementById('root')
 
 );
