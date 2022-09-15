@@ -52,14 +52,6 @@ export const taskReducer = (state: TasksStateType = initialState, action: Action
         [action.todolistId]: state[action.todolistId].filter(t => t.id !== action.taskId)
       }
     };
-    /*switch (action.type) {
-    case 'REMOVE-TASK': {
-      const stateCopy = {...state};
-      const tasks = state[action.todolistId]
-      const filteredTasks = tasks.filter(t => t.id !== action.taskId)
-      stateCopy[action.todolistId] = filteredTasks;
-      return stateCopy;
-    };*/
 
     case 'ADD-TASK': {
       const newTask = { id: v1(), title: action.title, isDone: false };

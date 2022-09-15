@@ -6,7 +6,7 @@ export type AddTodolistFormType = {
   addItem: (title: string) => void
 }
 
-export function AddTodolistForm(props: AddTodolistFormType) {
+export const AddTodolistForm = React.memo((props: AddTodolistFormType) => {
 
   let [newTaskTitle, setNewTaskTitle] = useState('');
   let [error, setError] = useState<string | null>(null);
@@ -16,7 +16,10 @@ export function AddTodolistForm(props: AddTodolistFormType) {
   };
 
   const onKeyPressHandler = (e: KeyboardEvent<HTMLInputElement>) => {
-    setError(null);
+    if (error !== null) {
+      setError(null);
+    }
+
     if (e.code === 'Enter' && newTaskTitle.trim() !== '') {
       props.addItem(newTaskTitle);
       setNewTaskTitle('');
@@ -25,6 +28,7 @@ export function AddTodolistForm(props: AddTodolistFormType) {
       setError('Field is required');
     }
   };
+
   const addTask = () => {
     if (newTaskTitle.trim() === '') {
       setError('Field is required');
@@ -34,22 +38,21 @@ export function AddTodolistForm(props: AddTodolistFormType) {
     setNewTaskTitle('');
   };
 
-
-  return <div>
-    <TextField
-      value={newTaskTitle}
-      variant={'outlined'}
-      label={'Type value'}
-      color={'primary'}
-      onChange={onNewTitleChangeHandler}
-      onKeyPress={onKeyPressHandler}
-      error={!!error}
-      helperText={error}
-    />
-    <IconButton onClick={addTask}  color={'secondary'}>
-      <AddBox />
-    </IconButton>
-  </div>
-
-
-}
+  return (
+    <div>
+      <TextField
+        value={newTaskTitle}
+        variant={'outlined'}
+        label={'Type value'}
+        color={'primary'}
+        onChange={onNewTitleChangeHandler}
+        onKeyPress={onKeyPressHandler}
+        error={!!error}
+        helperText={error}
+      />
+      <IconButton onClick={addTask}  color={'secondary'}>
+        <AddBox />
+      </IconButton>
+    </div>
+  );
+} )
