@@ -24,6 +24,17 @@ import {
   changeTaskTitleAC,
   removeTaskAC
 } from './Store/tasks-reducer';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { amber } from '@mui/material/colors';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#1c54b2',
+    },
+    secondary: amber
+  }
+})
 
 export type TodolistType = {
   id: string
@@ -80,7 +91,7 @@ export function AppWithRedux() {
     dispatch(addTodolistAC(title))
   }, [dispatch])
 
-  return (
+  return <ThemeProvider theme={theme}>
     <div className="App">
       <AppBar position="static">
         <Toolbar>
@@ -134,7 +145,7 @@ export function AppWithRedux() {
 
 
     </div>
-  );
+  </ThemeProvider>
 }
 
 
