@@ -14,7 +14,7 @@ import { Menu } from '@mui/icons-material';
 import {
   addTodolistAC,
   changeTodolistFilterAC,
-  changeTodolistTitleAC, removeTodolistAC,
+  changeTodolistTitleAC, FilterValueType, removeTodolistAC, TodolistDomainType
 } from './Store/todolists-reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppRootType } from './Store/store';
@@ -26,6 +26,7 @@ import {
 } from './Store/tasks-reducer';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { amber } from '@mui/material/colors';
+import { TaskStatuses, TaskType } from './api/todolists-api';
 
 const theme = createTheme({
   palette: {
@@ -36,20 +37,6 @@ const theme = createTheme({
   }
 })
 
-export type TodolistType = {
-  id: string
-  title: string
-  filter: FilterValueType
-}
-
-export type TaskType = {
-  isDone: boolean
-  id: string
-  title: string
-}
-
-export type FilterValueType = 'all' | 'active' | 'completed';
-
 export type TasksStateType = {
   [key: string]: Array<TaskType>
 }
@@ -57,7 +44,7 @@ export type TasksStateType = {
 export function AppWithRedux() {
   const tasks = useSelector<AppRootType, TasksStateType>(state => state.tasks)
   const dispatch = useDispatch();
-  const todolists = useSelector<AppRootType, Array<TodolistType>>(state => state.todolists)
+  const todolists = useSelector<AppRootType, Array<TodolistDomainType>>(state => state.todolists)
 
   const removeTask = useCallback( (todolistId: string, taskId: string) => {
     dispatch(removeTaskAC(todolistId, taskId))
@@ -71,8 +58,8 @@ export function AppWithRedux() {
     dispatch(changeTaskTitleAC(title, todolistId, taskId))
   }, [dispatch])
 
-  const changeTaskStatus = useCallback( (taskId: string, isDone: boolean, todolistId: string ) => {
-    dispatch(changeTaskStatusAC(taskId, isDone, todolistId))
+  const changeTaskStatus = useCallback( (taskId: string, status: TaskStatuses, todolistId: string ) => {
+    dispatch(changeTaskStatusAC(taskId, status, todolistId))
   }, [dispatch])
 
   const changeFilter = useCallback((value: FilterValueType, todolistId: string) => {
