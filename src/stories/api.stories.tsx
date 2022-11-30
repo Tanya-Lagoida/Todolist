@@ -147,7 +147,7 @@ export const UpdateTaskTitle = () => {
   const [todolistId, setTodolistId] = useState<string>('')
   const [taskId, setTaskId] = useState<string>('')
   const updateTaskTitle = () => {
-    todolistsAPI.updateTaskTitle(todolistId, taskId, {
+    todolistsAPI.updateTask(todolistId, taskId, {
       title: taskTitle,
       description: description,
       status: status,
