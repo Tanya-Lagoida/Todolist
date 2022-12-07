@@ -1,4 +1,4 @@
-import { TasksStateType } from '../AppWithRedux';
+
 import {
   addTaskAC,
   changeTaskAC,
@@ -14,6 +14,7 @@ import {
   todolistid2
 } from './todolists-reducer';
 import { TaskPriorities, TaskStatuses } from '../api/todolists-api';
+import { TasksStateType } from '../TodoListLists';
 
 let startState: TasksStateType = {}
 
@@ -54,7 +55,7 @@ test('correct task should be deleted from correct array', () => {
   });
   expect(endState["todolistId1"].length).toBe(4);
   expect(endState["todolistId2"].length).toBe(2);
-  expect(endState["todolistId2"].every(t => t.id !== "2")).toBeTruthy;
+  expect(endState["todolistId2"].every((t: { id: string; }) => t.id !== "2")).toBeTruthy;
 });
 
 test('correct task should be added to correct array', () => {
